@@ -41,6 +41,10 @@ class Voter
  */
 function instantRunoff(voters: Voter[],numCandidates: number): number[]
 {
+    if(numCandidates===0)
+    {
+        return [];
+    }
     class Candidate
     {
         public voters: Voter[];
@@ -51,10 +55,6 @@ function instantRunoff(voters: Voter[],numCandidates: number): number[]
             this.voteHist=0;
         }
     }
-    if(numCandidates===0)
-    {
-        return [];
-    }
     let winners: number[]=[];
     let candidates: Candidate[]=[];
     for(let i=0;i<numCandidates;++i)
@@ -64,7 +64,6 @@ function instantRunoff(voters: Voter[],numCandidates: number): number[]
     winners.length=numCandidates;
     let w: number=0;
     let l: number=(numCandidates-1);
-
     function findWinner(candidates: Candidate[],numVotes: number): number
     {
         let needed: number=Math.ceil(numVotes/2);
@@ -94,7 +93,7 @@ function instantRunoff(voters: Voter[],numCandidates: number): number[]
             {
                 const t=cand.voters.length;
                 const pv=cand.voteHist;
-                if(t<=min&&pv<prevVotes)
+                if(t<min||t===min&&pv<prevVotes)
                 {
                     min=t;
                     loser=i;

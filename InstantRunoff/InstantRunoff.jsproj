@@ -83,7 +83,6 @@
     <Content Include="images\StoreLogo.png" />
     <Content Include="images\Wide310x150Logo.scale-200.png" />
     <Content Include="js\instantrunoff.js" />
-    <Content Include="js\test.html" />
     <TypeScriptCompile Include="js\instantrunoff.ts" />
     <Content Include="css\default.css" />
     <None Include="InstantRunoff_TemporaryKey.pfx" />

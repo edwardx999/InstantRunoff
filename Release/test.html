@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+
+</head>
+<body>
+    <script src="instantrunoff.js"></script>
+    <script>
+        function arrayEquals(a,b)
+        {
+            const al=a.length;
+            const bl=b.length;
+            if(al===bl)
+            {
+                for(let i=0;i<al;++i)
+                {
+                    if(a[i]!==b[i]) { return false; }
+                }
+                return true;
+            }
+            return false;
+        }
+        function assertArrayEquals(a,b)
+        {
+            if(!(arrayEquals(a,b)))
+            {
+                throw "Expected: ["+a+"] Actual: ["+b+"]";
+            }
+        }
+        function test1()
+        {
+            const candidates=["Alice Cartelet","Bob Ross","Carter Cartman","Debra White"];
+            var voters=[];
+            voters.push(new Voter([0,1]));
+            voters.push(new Voter([0,1]));
+            voters.push(new Voter([1,0]));
+            voters.push(new Voter([3]));
+            voters.push(new Voter([3]));
+            voters.push(new Voter([3]));
+            const winners=instantRunoff(voters,4);
+            assertArrayEquals([3,0,1,2],winners);
+        }
+        function test2()
+        {
+            var voters=[];
+            voters.push(new Voter([0,1]));
+            voters.push(new Voter([0,1]));
+            voters.push(new Voter([1,0]));
+            voters.push(new Voter([1,0]));
+            voters.push(new Voter([3]));
+            voters.push(new Voter([3]));
+            voters.push(new Voter([3]));
+            const winners=instantRunoff(voters,4);
+            assertArrayEquals([1,3,0,2],winners);
+        }
+        //test1();
+        test2();
+    </script>
+</body>
+</html>

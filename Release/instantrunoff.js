@@ -1,4 +1,4 @@
-﻿/*
+/*
 Copyright(C) 2018 Edward Xie
 
 This program is free software: you can redistribute it and/or modify
@@ -36,6 +36,9 @@ var Voter = /** @class */ (function () {
  * WARNING: voters is modified!
  */
 function instantRunoff(voters, numCandidates) {
+    if (numCandidates === 0) {
+        return [];
+    }
     var Candidate = /** @class */ (function () {
         function Candidate() {
             this.voters = [];
@@ -43,9 +46,6 @@ function instantRunoff(voters, numCandidates) {
         }
         return Candidate;
     }());
-    if (numCandidates === 0) {
-        return [];
-    }
     var winners = [];
     var candidates = [];
     for (var i = 0; i < numCandidates; ++i) {
@@ -76,7 +76,7 @@ function instantRunoff(voters, numCandidates) {
             if (cand) {
                 var t = cand.voters.length;
                 var pv = cand.voteHist;
-                if (t <= min && pv < prevVotes) {
+                if (t < min || t === min && pv < prevVotes) {
                     min = t;
                     loser = i;
                     prevVotes = pv;
