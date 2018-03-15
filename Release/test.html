@@ -103,10 +103,22 @@
             voters.push(new Voter([1,2]));
             assertArrayEquals([2,0,1],instantRunoff(voters,3));
         }
+        function test5()
+        {
+            var voters=[];
+            for(let i=0;i<100;++i)
+                voters.push(new Voter([0,1]));
+            for(let i=0;i<99;++i)
+                voters.push(new Voter([1,0]));
+            for(let i=0;i<199;++i)
+                voters.push(new Voter([2]));
+            assertArrayEquals([2,0,1],instantRunoff(voters,3));
+        }
         doTest(test1);
         doTest(test2);
         doTest(test3);
         doTest(test4);
+        doTest(test5);
     </script>
 </body>
 </html>
